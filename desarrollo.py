@@ -61,12 +61,22 @@ def crearLavados(lavados,prendas):  #devuelve un diccionario con todos
 
     return(lavados)
 
+def escribirArchivo(diccionario):   #escribe el archivo en el formato que se solicita
+    fichero = open ("resultado.txt",mode='w')
+    for x,y in diccionario.items():
+        for j in y:
+            fichero.write(str(x) + ' '+ str(j)+ '\n')   #formato solicitado
+    print("Se escribio el archivo")
+    fichero.close()
+
+
 def main():
     archivo = open('Enunciado.txt',mode= 'r',encoding= 'utf-8')
     prendas = crearDiccionario(archivo)
     #print(prendas)
     lavados = {}
     lavados = crearLavados(lavados,prendas)
-    print(lavados)
+    #print(lavados)
+    escribirArchivo(lavados)
 
 main()
