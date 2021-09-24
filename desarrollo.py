@@ -8,8 +8,8 @@ def crearDiccionario(archivo):
             dato0,dato1,dato2 = tuple(linea.replace('\n','').split())            
             if dato0 == 'e':
                 if dato1 not in dic.keys():
-                    dic[dato1] = {'tiempo':0,'incomp':[]}                    
-                dic[dato1]['incomp'].append(dato2)                    
+                    dic[dato1] = {'tiempo':0,'incompatibilidades':[]}                    
+                dic[dato1]['incompatibilidades'].append(dato2)                    
             else:
                 dic[dato1]['tiempo']= int(dato2)                    
         linea = archivo.readline()
@@ -33,7 +33,7 @@ def esCompatible(lista,dic):
     while index < len(lista) and compatible:    #la condicion de que sea compatible la prenda que se esta buscando localizar, es que sea compatible con   
                                                 #todas las prendas que ya estan asignadas al lavado        
         
-        if lista[index] in dic['incomp']:      
+        if lista[index] in dic['incompatibilidades']:      
             compatible = False                  #si la prenda del lavado que esta iterando esta en la lista de incompatibles de la prenda que 
                                                 #se quiere asignar, ya no son incompatibles
         
@@ -65,7 +65,7 @@ def escribirArchivo(diccionario):   #escribe el archivo en el formato que se sol
     fichero = open ("resultado.txt",mode='w')
     for x,y in diccionario.items():
         for j in y:
-            fichero.write(str(x) + ' '+ str(j)+ '\n')   #formato solicitado
+            fichero.write(str(j) + ' '+ str(x)+ '\n')   #formato solicitado
     print("Se escribio el archivo")
     fichero.close()
 
