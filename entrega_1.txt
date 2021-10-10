@@ -4,3 +4,7 @@ Las restricciones justamente se basan en separar la ropa que destiñe de la que 
 que la ropa "clara" no termine manchada.
 
 En un primer momento, voy a leer el archivo, y luego, utilizare alguna estructura que me permita almacenar toda esa informacion para lograr lavar estas 20 prendas en la menor cantidad de tiempo posible.
+
+En el desarrollo del problema, eligiendo la estructura de diccionario para realizar el tp, procedi por decidir que las prendas que tendrian prioridad de ser ubicadas en los lavados, serian aquellas que mas timpo de lavado llevaran. 
+
+Haciedno eso, llegue al resultado de 67 (horas) de lavado para lograr lavar las 20 prendas.
