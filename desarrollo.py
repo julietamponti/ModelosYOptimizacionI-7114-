@@ -71,7 +71,7 @@ def escribirArchivo(diccionario):   #escribe el archivo en el formato que se sol
 
 
 def main():
-    archivo = open('Enunciado.txt',mode= 'r',encoding= 'utf-8')
+    archivo = open('Enunciado2.txt',mode= 'r',encoding= 'utf-8')
     prendas = crearDiccionario(archivo)
     #print(prendas)
     lavados = {}
