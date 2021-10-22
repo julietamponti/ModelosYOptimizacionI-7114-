@@ -11,7 +11,12 @@ def crearDiccionario(archivo):
                     dic[dato1] = {'tiempo':0,'incompatibilidades':[]}                    
                 dic[dato1]['incompatibilidades'].append(dato2)                    
             else:
-                dic[dato1]['tiempo']= int(dato2)                    
+                if not dato1 in dic.keys():
+                    dic[dato1] = {'tiempo':0,'incompatibilidades':[]}  
+                    dic[dato1]['tiempo']= int(dato2)    
+                else:
+                    dic[dato1]['tiempo']= int(dato2)    
+                print(dato1)               
         linea = archivo.readline()
     archivo.close()
     return dic
@@ -62,7 +67,7 @@ def crearLavados(lavados,prendas):  #devuelve un diccionario con todos
     return(lavados)
 
 def escribirArchivo(diccionario):   #escribe el archivo en el formato que se solicita
-    fichero = open ("resultado.txt",mode='w')
+    fichero = open ("resultado2.txt",mode='w')
     for x,y in diccionario.items():
         for j in y:
             fichero.write(str(j) + ' '+ str(x)+ '\n')   #formato solicitado
