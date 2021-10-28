@@ -9,7 +9,10 @@ def crearDiccionario(archivo):
             if dato0 == 'e':
                 if dato1 not in dic.keys():
                     dic[dato1] = {'tiempo':0,'incompatibilidades':[]}                    
-                dic[dato1]['incompatibilidades'].append(dato2)                    
+                dic[dato1]['incompatibilidades'].append(dato2)    
+                if dato2 not in dic.keys():
+                    dic[dato2] = {'tiempo':0,'incompatibilidades':[]} 
+                dic[dato2]['incompatibilidades'].append(dato1)              
             else:
                 if not dato1 in dic.keys():
                     dic[dato1] = {'tiempo':0,'incompatibilidades':[]}  
@@ -35,16 +38,13 @@ def mayorTiempoDeLavado(dic): #devuelve el numero de prenda que mas tarda den la
 def esCompatible(lista,dic):
     compatible = True
     index = 0
-    while index < len(lista) and compatible:    #la condicion de que sea compatible la prenda que se esta buscando localizar, es que sea compatible con   
-                                                #todas las prendas que ya estan asignadas al lavado        
-        
-        if lista[index] in dic['incompatibilidades']:      
-            compatible = False                  #si la prenda del lavado que esta iterando esta en la lista de incompatibles de la prenda que 
-                                                #se quiere asignar, ya no son incompatibles
-        
+    while index < len(lista) and compatible:
+        if lista[index] in dic['incompatibilidades']:
+            compatible = False
         else:
             index += 1
     return compatible
+    
 
 def crearLavados(lavados,prendas):  #devuelve un diccionario con todos 
     while len(prendas) > 0:
