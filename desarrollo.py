@@ -1,5 +1,7 @@
-#Voy a crear un diccionario, donde la clave es el numero de la prenda prenda y  el valor de cada una, un diccionario que contiene tiempo de lavado
-# y una lista con sus incompatibilidades.
+# ---------------------------------------------------
+# DESARROLLO TP1 MOLDEADO AL TP2 ---- 1er OPCIÓN ----
+# ---------------------------------------------------
+
 """
 def crearDiccionario(archivo):
     dic = {}
@@ -35,7 +37,6 @@ def mayorTiempoDeLavado(dic): #devuelve el numero de prenda que mas tarda den la
             kmax = k              # la prenda que mas tarda en lavarse
     return (kmax,dic.pop(kmax)) # elimino la prenda, ya que ya ha sido asignada a un lavado, es decir que sera lavada
 
-
 def esCompatible(lista,dic):
     compatible = True
     index = 0
@@ -46,7 +47,6 @@ def esCompatible(lista,dic):
             index += 1
     return compatible
     
-
 def crearLavados(lavados,prendas):  #devuelve un diccionario con todos 
     while len(prendas) > 0:
         lavado =[]
@@ -75,7 +75,6 @@ def escribirArchivo(diccionario):   #escribe el archivo en el formato que se sol
     print("Se escribio el archivo")
     fichero.close()
 
-
 def main():
     archivo = open('Enunciado2.txt',mode= 'r',encoding= 'utf-8')
     prendas = crearDiccionario(archivo)
@@ -85,6 +84,10 @@ def main():
     #print(lavados)
     escribirArchivo(lavados)
 """
+
+# ---------------------------------------------------
+#                  MEJOR MODELO TP2                 #
+# ---------------------------------------------------
 
 def leerArc (archivo):
     linea = archivo.readline()
@@ -119,19 +122,8 @@ def mandarPrendasALavar(prendas,cantidadDePrendas):
 def ordenMayorTiempoDeLavado(prendas):
     prendas.sort(key=lambda x:x.getDuracionLavadoPrenda(),reverse=True)
     return (prendas) 
-
-
-def crearLavados(list_mayor_igual_10,list_menor_10):
-    lavados_1 = generarLavados(list_menor_10)
-    lavados_2 = generarLavados(list_mayor_igual_10)
-    lavados = []
-    for i in lavados_1:
-        lavados.append(i)
-    for j in lavados_2:
-        lavados.append(j)
-    return(lavados)
     
-def generarLavados(prendas):
+def crearLavados(prendas):
     lavados = []
     prendas = ordenMayorTiempoDeLavado(prendas)
     lavado = Lavado(1)
@@ -149,10 +141,11 @@ def generarLavados(prendas):
             lavado.agregarPrenda(prenda)
             lavados.append(lavado)
             prenda.esLavada()
+        
     return (lavados)            
 
 def escribirArchivo(lavados):
-    fichero = open('2entrega.txt','w')
+    fichero = open('resultadoTP2.txt','w')
     for lavado in lavados:
         for prenda in lavado.getPrendasEnLavado():
             fichero.write(str(prenda.get_nro()) + ' ' + str(lavado.getNumLavado()) +"\n")
@@ -196,61 +189,60 @@ class Lavado:
     def __init__(self,numero):
         self.nro = numero
         self.prendas = []
-        #self.prendasNoAceptadas = []
 
     def agregarPrenda(self,prenda):
         #self.prendas.append(prenda.get_nro())
         self.prendas.append(prenda)
         #self.cancelarPrendas(prenda.getIncompatibilidades())
     
-    """def cancelarPrendas(self,incompatibilidades):
-        if (len(self.prendasNoAceptadas))==0:
-            self.prendasNoAceptadas == incompatibilidades
-        else:
-            for i in incompatibilidades:
-                if not i  in prendasNoAceptadas:
-                    self.prendasNoAceptadas.append(i)
-    """
     def cantPrendas(self):
         return (len(self.prendas))
     
     def esCompatible(self,prendaAAgregar):
         for prenda in self.prendas:
-            #return (prenda.prendaCompatible(prendaAAgregar))
             if prendaAAgregar.get_nro() in prenda.getIncompatibilidades():
                 return False
         return True
-                #a = a-1
-                #print('a:',a)
+
     def getPrendasEnLavado(self):
         return(self.prendas)
     
     def getNumLavado(self):
         return(self.nro)
 
+    def get_duracion(self):
+        max = 0
+        for prenda in self.prendas:
+            if prenda.getDuracionLavadoPrenda()>max:
+                max = prenda.getDuracionLavadoPrenda()
+        return(max)
+
 def main():
     archivo = open('Enunciado2.txt',mode= 'r',encoding= 'utf-8')
-    #archivo = open('probando.txt',mode= 'r',encoding= 'utf-8')
+    #archivo = open('Enunciado.txt',mode= 'r',encoding= 'utf-8')
     listaPrendas = leerArc(archivo)
-    list_menor_10 = []
-    list_mayor_igual_10 = [] 
-    for prenda in listaPrendas:
-        if prenda.getDuracionLavadoPrenda()>= 10:
-            list_mayor_igual_10.append(prenda)
-        else:
-            list_menor_10.append(prenda)
+    lavados = crearLavados(listaPrendas)
 
-    lavados = crearLavados(list_mayor_igual_10,list_menor_10)
-    #suma = 0 
+    
+    totalTiempLav = 0
     for lavado in lavados:
+        """
         print('lavado: ',lavado.getNumLavado())
         print ('prendas en lav: ')
         for prenda in lavado.getPrendasEnLavado():
-            print('num:',prenda.get_nro(),'tiempo: ', prenda.getDuracionLavadoPrenda())
+            #print('num:',prenda.get_nro(),'tiempo: ', prenda.getDuracionLavadoPrenda())
+            print(prenda.get_nro())
+        """
+        totalTiempLav += lavado.get_duracion()
         #suma = suma + len(lavado.getPrendasEnLavado())
-
+    
     #print('suma: ',suma)
     
+    print('\n')
+    print('------------------------------------------------------')
+    print('duracion total de lavados: ',totalTiempLav)
+    print('------------------------------------------------------')   
     
     escribirArchivo(lavados)
+
 main()
