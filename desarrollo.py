@@ -124,22 +124,21 @@ def ordenMayorTiempoDeLavado(prendas):
 def crearLavados(prendas):
     lavados = []
     prendas = ordenMayorTiempoDeLavado(prendas)
+    lavado = Lavado(1)
+    prenda = prendas[0]
+    lavado.agregarPrenda(prenda)
+    lavados.append(lavado)
+    prenda.esLavada()
     for prenda in prendas:
-        if len(lavados)==0:
-            lavado = Lavado(1)
+        for lavado in lavados:
+            if (lavado.esCompatible(prenda) and prenda.getEstado()==False):
+                lavado.agregarPrenda(prenda)
+                prenda.esLavada()
+        if prenda.getEstado() == False:
+            lavado = Lavado((len(lavados)+1))
             lavado.agregarPrenda(prenda)
             lavados.append(lavado)
             prenda.esLavada()
-        elif(prenda.getEstado() == False):
-            for lavado in lavados:
-                if (lavado.esCompatible(prenda) and prenda.getEstado()==False):
-                    lavado.agregarPrenda(prenda)
-                    prenda.esLavada()
-            if prenda.getEstado() == False:
-                lavado = Lavado((len(lavados)+1))
-                lavado.agregarPrenda(prenda)
-                lavados.append(lavado)
-                prenda.esLavada()
     return (lavados)            
 
 def escribirArchivo(lavados):
@@ -206,17 +205,16 @@ class Lavado:
         return (len(self.prendas))
     
     def esCompatible(self,prendaAAgregar):
-        a = self.cantPrendas()
-        print('a:',a)
+        #a = self.cantPrendas()
+        #print('a:',a)
         if prendaAAgregar not in self.prendas:
             for prenda in self.prendas:
                 #return (prenda.prendaCompatible(prendaAAgregar))
                 if prendaAAgregar.get_nro() in prenda.getIncompatibilidades():
                     return False
                 return True
-                a = a-1
-                print('a:',a)
-        return False
+                #a = a-1
+                #print('a:',a)
     def getPrendasEnLavado(self):
         return(self.prendas)
     
@@ -236,12 +234,15 @@ def main():
       
       """
     lavados = crearLavados(listaPrendas)
-    
-    for lavado in lavados:
-        print('lavado: ',lavado.getNumLavado())
-        print ('prendas en lav: ')
-        for prenda in lavado.getPrendasEnLavado():
-            print(prenda.get_nro())
+    #suma = 0 
+    #for lavado in lavados:
+        #print('lavado: ',lavado.getNumLavado())
+        #print ('prendas en lav: ')
+        #for prenda in lavado.getPrendasEnLavado():
+            #print(prenda.get_nro())
+        #suma = suma + len(lavado.getPrendasEnLavado())
+
+    #print('suma: ',suma)
     
     
     escribirArchivo(lavados)
