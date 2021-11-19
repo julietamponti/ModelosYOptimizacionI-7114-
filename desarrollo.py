@@ -117,42 +117,13 @@ def mandarPrendasALavar(prendas,cantidadDePrendas):
     return(prendas)
 
 def ordenMayorTiempoDeLavado(prendas):
-    """
-    max = 0 #ya que comparare con el y siempre sera menor a los tiempos de lavado
-    kmax = Prenda(1900)
-    
-    for prenda in prendas:
-        if prenda.getDuracionLavadoPrenda() > max:
-            max = prenda.getDuracionLavadoPrenda() # toma el valor maximo de tiempo
-            prendaMasLenta = prenda
-    prendas.remove(prendaMasLenta)   
-    """
-    i =1
-    for prenda in prendas:
-        if prendas[i].getDuracionLavadoPrenda < prendas[i+1].getDuracionLavadoPrenda:
-            guardoRef = prendas[i]
-            prendas[i]=prendas[i+1] 
-            prendas[i+1]= guardoRef
-        i = i+1
-    return (prendas) # elimino la prenda, ya que ya ha sido asignada a un lavado, es decir que sera lavada
+    prendas.sort(key=lambda x:x.getDuracionLavadoPrenda(),reverse=True)
+    return (prendas) 
 
 
 def crearLavados(prendas):
     lavados = []
-    """
-    while len(prendas)>0:
-        prendas,prenda = mayorTiempoDeLavado(prendas)
-        for lavado in lavados:
-            if lavado.esCompatible(prenda):
-                lavado.agregarPrenda(prenda)
-                prenda.esLavada()
-        if (prenda.getEstado())==False:
-            nroLav = len(lavados)+1
-            lavado = Lavado(nroLav)
-            lavado.agregarPrenda(prenda)
-            lavados.append(lavado)
-            prenda.esLavada()
-    """
+    prendas = ordenMayorTiempoDeLavado(prendas)
     for prenda in prendas:
         if len(lavados)==0:
             lavado = Lavado(1)
@@ -231,13 +202,20 @@ class Lavado:
                 if not i  in prendasNoAceptadas:
                     self.prendasNoAceptadas.append(i)
     """
+    def cantPrendas(self):
+        return (len(self.prendas))
+    
     def esCompatible(self,prendaAAgregar):
+        a = self.cantPrendas()
+        print('a:',a)
         if prendaAAgregar not in self.prendas:
             for prenda in self.prendas:
                 #return (prenda.prendaCompatible(prendaAAgregar))
                 if prendaAAgregar.get_nro() in prenda.getIncompatibilidades():
                     return False
                 return True
+                a = a-1
+                print('a:',a)
         return False
     def getPrendasEnLavado(self):
         return(self.prendas)
@@ -258,11 +236,13 @@ def main():
       
       """
     lavados = crearLavados(listaPrendas)
+    
     for lavado in lavados:
         print('lavado: ',lavado.getNumLavado())
         print ('prendas en lav: ')
         for prenda in lavado.getPrendasEnLavado():
             print(prenda.get_nro())
+    
+    
     escribirArchivo(lavados)
-
 main()
