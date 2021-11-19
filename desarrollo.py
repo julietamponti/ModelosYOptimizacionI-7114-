@@ -205,14 +205,11 @@ class Lavado:
         return (len(self.prendas))
     
     def esCompatible(self,prendaAAgregar):
-        #a = self.cantPrendas()
-        #print('a:',a)
-        if prendaAAgregar not in self.prendas:
-            for prenda in self.prendas:
-                #return (prenda.prendaCompatible(prendaAAgregar))
-                if prendaAAgregar.get_nro() in prenda.getIncompatibilidades():
-                    return False
-                return True
+        for prenda in self.prendas:
+            #return (prenda.prendaCompatible(prendaAAgregar))
+            if prendaAAgregar.get_nro() in prenda.getIncompatibilidades():
+                return False
+        return True
                 #a = a-1
                 #print('a:',a)
     def getPrendasEnLavado(self):
@@ -235,11 +232,11 @@ def main():
       """
     lavados = crearLavados(listaPrendas)
     #suma = 0 
-    #for lavado in lavados:
-        #print('lavado: ',lavado.getNumLavado())
-        #print ('prendas en lav: ')
-        #for prenda in lavado.getPrendasEnLavado():
-            #print(prenda.get_nro())
+    for lavado in lavados:
+        print('lavado: ',lavado.getNumLavado())
+        print ('prendas en lav: ')
+        for prenda in lavado.getPrendasEnLavado():
+            print(prenda.get_nro())
         #suma = suma + len(lavado.getPrendasEnLavado())
 
     #print('suma: ',suma)
