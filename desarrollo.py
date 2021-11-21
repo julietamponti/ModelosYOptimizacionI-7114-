@@ -89,6 +89,8 @@ def main():
 #                  MEJOR MODELO TP2                 #
 # ---------------------------------------------------
 
+
+
 def leerArc (archivo):
     linea = archivo.readline()
     prendas = []
@@ -122,9 +124,25 @@ def mandarPrendasALavar(prendas,cantidadDePrendas):
 def ordenMayorTiempoDeLavado(prendas):
     prendas.sort(key=lambda x:x.getDuracionLavadoPrenda(),reverse=True)
     return (prendas) 
-    
-def crearLavados(prendas):
+
+def generarLavados(prendas):
     lavados = []
+    menor_10, mayor_igual_10 = ordenarPrioridad(prendas)
+    return(crearLavados(prendas,lavados))
+
+def ordenarPrioridad(prendas):
+    menor_10 = []
+    mayor_igual_10 = []
+    for prenda in prendas:
+        if prenda.getDuracionLavadoPrenda()<10:
+            menor_10.append(prenda)
+        else:
+            mayor_igual_10.append(prenda)
+    return (menor_10,mayor_igual_10)
+
+
+#def crearLavados(prendas):
+def crearLavados(prendas, lavados):
     prendas = ordenMayorTiempoDeLavado(prendas)
     lavado = Lavado(1)
     prenda = prendas[0]
@@ -221,18 +239,18 @@ def main():
     archivo = open('Enunciado2.txt',mode= 'r',encoding= 'utf-8')
     #archivo = open('Enunciado.txt',mode= 'r',encoding= 'utf-8')
     listaPrendas = leerArc(archivo)
-    lavados = crearLavados(listaPrendas)
-
+    #lavados = crearLavados(listaPrendas)
+    lavados = generarLavados(listaPrendas)
     
     totalTiempLav = 0
     for lavado in lavados:
-        """
+        
         print('lavado: ',lavado.getNumLavado())
         print ('prendas en lav: ')
         for prenda in lavado.getPrendasEnLavado():
-            #print('num:',prenda.get_nro(),'tiempo: ', prenda.getDuracionLavadoPrenda())
-            print(prenda.get_nro())
-        """
+            print('num:',prenda.get_nro(),'tiempo: ', prenda.getDuracionLavadoPrenda())
+            #print(prenda.get_nro())
+        
         totalTiempLav += lavado.get_duracion()
         #suma = suma + len(lavado.getPrendasEnLavado())
     
@@ -246,3 +264,4 @@ def main():
     escribirArchivo(lavados)
 
 main()
+
