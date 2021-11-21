@@ -1,0 +1,14 @@
+Para comenzar, he analizado el enunciado del problema brindado por la catedra.
+La mejor solución posible de este problema, sería que todas las prendas se lavaran en un mismo lavado. Pero esto es imposible, dado que tengo que contemplar las restricciones. 
+Las restricciones justamente se basan en separar la ropa que destiñe de la que no, para
+que la ropa "clara" no termine manchada.
+
+Luego de haber analizado el enunciado, procedi a la resolucion del mismo: en primer lugar, opte por adaptar mi codigo del tp1 a las condiciones de este nuevo tp (dado que por ejemplo la prenda 1 era incompatible (y sabia que lo era) con la prenda 2, pero la preda 2 no sabia q era incompatible con al prenda 1). Siendo el tiempo de lavados de 711 [unidad de tiempo] para lavar las 385 prendas.
+
+No me quede conforme con mi resultado, por lo que procedí, a mejorar mi codigo, creando objetos. Es decir, antes constaba con estructuras como diccionarios, para almacenar la informacion, y ahora decidi crear la clase Prenda y la clase Lavado. Con lo que obtuve un resultado de 493 [unidad de tiempo] para lavar las 385 prendas.
+
+Volvi a no conformarme con el resultado, dado que veia que el ranking habia mejores resultados, por lo que comence a hacer un analisis mas profundo de cual podria ser una resolucion mas optima para este problema. Llegando a la conclusión que (quiza no la mejor) una mejor solucion a la que habia encontrado, era utilizar el coloreo de grados. Por lo que procedi a buscar algoritmos en la web que pudieran servirme para desarrollar mi código, llegando a esta pagina web: http://www.dma.fi.upm.es/personal/gregorio/grafos/web/iagraph/coloracion.html. La cual me sirvio de guia. 
+Primero, ordene la lista de prendas, en orden descendente de acuerdo a la cantidad de incompatibilidades que estas tuvieran. Llegando a un resultado de: 347 [Unidad de tiempo] para lavar las 385 prendas. Al ver, que si bien estaba más cerca del resultado más óptimo, pero claramente podía ser mejor, segui buscando.
+Y en segundo lugar, ordene la lista de prendas inicialemente por el tiempo de lavado de las mismas, obteniendo asi, mi mejor resultado: 305 [unidad de tiempo] para lavar las 385 prendas.
+
+Una aclaración, quedaron varios archivos .py, dado que fui trabajando en archivos paralelos cada versión, la que tiene mi solucion optima es "intentoGrafo.py".

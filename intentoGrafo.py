@@ -1,9 +1,9 @@
 from Prenda import Prenda
 from Lavado import Lavado
 
-# ---------------------------------------------------
-#                  INTENTO GRAFO TP2                 #
-# ---------------------------------------------------
+# ----------------------------------------------------------
+#                  MEJOR MODELO: GRAFO TP2                 #
+# ----------------------------------------------------------
 
 def leerArc (archivo):
     linea = archivo.readline()
@@ -37,21 +37,13 @@ def mandarPrendasALavar(prendas,cantidadDePrendas):
         prendas.append(Prenda(i))
     return(prendas)
 
-# Ordeno por cantidad de incompatibilidades en un primer momento, suponiendo que a mayor 
-# cantidad de incomaptibilidades resulta mas dificil ubicar esta prendas en lavados (colorearlas)
-# y me da un resultado mas optimo
-def ordenCantidadIncompatibilidades(prendas):
-    prendas.sort(key=lambda x:x.getCantidadIncompatibilidades(),reverse=True)
-    return (prendas) 
+# def ordenCantidadIncompatibilidades(prendas):
+#     prendas.sort(key=lambda x:x.getCantidadIncompatibilidades(),reverse=True)
+#     return (prendas) 
 
 def ordenTiempoDeLavado(prendas):
     prendas.sort(key=lambda x:x.getDuracionLavadoPrenda(),reverse=True)
     return (prendas) 
-
-
-# def ordenMayorTiempoDeLavado(prendas):
-#     prendas.sort(key=lambda x:x.getDuracionLavadoPrenda(),reverse=True)
-#     return (prendas) 
 
 def actualizarGradoPrendas(prendas,lavados):
     for prenda in prendas:
@@ -76,21 +68,17 @@ def crearLavados(prendas):
     prenda.esLavada()
     prendas.pop(0)
     while(len(prendas)>0):
-        print('lenPrendas: ',len(prendas))
         prendaAAsignar = buscarPrendaConMayorGrado(prendas, lavados)
         for lavado in lavados:
             if (lavado.esCompatible(prendaAAsignar) and prendaAAsignar.getEstado()==False):
-                #print('if 1')
                 lavado.agregarPrenda(prendaAAsignar)
                 prendaAAsignar.esLavada()
         if prendaAAsignar.getEstado() == False:
-            #print('if 2')
             lavado = Lavado((len(lavados)+1))
             lavado.agregarPrenda(prendaAAsignar)
             lavados.append(lavado)
             prendaAAsignar.esLavada()
         prendas.remove(prendaAAsignar)
-        print('lenPrendas desp del for: ',len(prendas))
     return (lavados)            
 
 def escribirArchivo(lavados):
@@ -103,13 +91,12 @@ def escribirArchivo(lavados):
 
 def main():
     archivo = open('Enunciado2.txt',mode= 'r',encoding= 'utf-8')
-    #archivo = open('Enunciado.txt',mode= 'r',encoding= 'utf-8')
     listaPrendas = leerArc(archivo)
     #lista_orden_incomp = ordenCantidadIncompatibilidades(listaPrendas)
     lista_orden_tiempo = ordenTiempoDeLavado(listaPrendas)
     #lavados = crearLavados(lista_orden_incomp)
     lavados = crearLavados(lista_orden_tiempo)
-    
+    """
     totalTiempLav = 0
     for lavado in lavados:
         
@@ -123,12 +110,12 @@ def main():
         #suma = suma + len(lavado.getPrendasEnLavado())
     
     #print('suma: ',suma)
-    """
+   
     print('\n')
     print('------------------------------------------------------')
     print('duracion total de lavados: ',totalTiempLav)
     print('------------------------------------------------------')   
-    """
+   """
     escribirArchivo(lavados)
     
     print(listaPrendas)
