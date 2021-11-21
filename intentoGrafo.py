@@ -44,6 +44,10 @@ def ordenCantidadIncompatibilidades(prendas):
     prendas.sort(key=lambda x:x.getCantidadIncompatibilidades(),reverse=True)
     return (prendas) 
 
+def ordenTiempoDeLavado(prendas):
+    prendas.sort(key=lambda x:x.getDuracionLavadoPrenda(),reverse=True)
+    return (prendas) 
+
 
 # def ordenMayorTiempoDeLavado(prendas):
 #     prendas.sort(key=lambda x:x.getDuracionLavadoPrenda(),reverse=True)
@@ -101,8 +105,10 @@ def main():
     archivo = open('Enunciado2.txt',mode= 'r',encoding= 'utf-8')
     #archivo = open('Enunciado.txt',mode= 'r',encoding= 'utf-8')
     listaPrendas = leerArc(archivo)
-    lista_orden_incomp = ordenCantidadIncompatibilidades(listaPrendas)
-    lavados = crearLavados(lista_orden_incomp)
+    #lista_orden_incomp = ordenCantidadIncompatibilidades(listaPrendas)
+    lista_orden_tiempo = ordenTiempoDeLavado(listaPrendas)
+    #lavados = crearLavados(lista_orden_incomp)
+    lavados = crearLavados(lista_orden_tiempo)
     
     totalTiempLav = 0
     for lavado in lavados:
@@ -117,12 +123,12 @@ def main():
         #suma = suma + len(lavado.getPrendasEnLavado())
     
     #print('suma: ',suma)
-    
+    """
     print('\n')
     print('------------------------------------------------------')
     print('duracion total de lavados: ',totalTiempLav)
     print('------------------------------------------------------')   
-    
+    """
     escribirArchivo(lavados)
     
     print(listaPrendas)
