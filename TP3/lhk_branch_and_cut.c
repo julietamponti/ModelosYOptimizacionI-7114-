@@ -30,7 +30,8 @@ int resolver(CPXENVptr env, CPXLPptr lp) {
 	double *x = NULL;
 
 	/* Optimize the problem and obtain solution */
-
+	
+	/*CPXmipopt devuelve la solucion del problema*/
 	status = CPXmipopt(env, lp);
 	if (status) {
 		fprintf(stderr, "Failed to optimize MIP.\n");
@@ -78,6 +79,7 @@ int resolver(CPXENVptr env, CPXLPptr lp) {
 				colname[0] = namestore;
 			}
 			printf("Column %3d (%10s):  Value = %17.10g\n", j, colname[0], x[j]);
+
 		}
 	}
 
@@ -350,6 +352,8 @@ int procesar_Tp(char *path, char *pathOutput) {
 
 	int nodecount = CPXgetnodecnt(env, lp);
 	printf("\n");
+	
+	/*CONSULTAR POR QUE 101*/
 	if (solstat != 101) {
 		printf("Parece que no se llego al optimo, status: %d\n", solstat);
 	}
@@ -357,9 +361,6 @@ int procesar_Tp(char *path, char *pathOutput) {
 	printf("Cota: %f\n", bestobjval);
 	printf("Nodos: %d\n", nodecount);
 	printf("Tiempo: %f\n", fin - inicio);
-	for (i = 0; i < Nr_vert; i++) {
-		printf(" %i ", coloreoValido[i]);
-	}
 
 	/*=======================================================================*/
 
@@ -401,8 +402,9 @@ void buscarSolucionInicial(int* coloreoValido) {
 	int lavados[] = { 5, 4, 2, 2, 1, 1, 4, 2, 2, 1, 5, 1, 6, 2, 2, 1, 1, 1, 2, 2, 1, 5, 4, 3, 3, 3, 3, 1, 1, 3, 3, 3, 1, 3, 1, 3, 3, 3, 1, 1, 1, 3, 3, 1, 3, 3, 2, 5, 4, 2, 2, 1, 1, 4, 2, 2, 1, 5, 1, 7, 2, 2, 1, 1, 1, 2, 2, 1, 5, 4, 3, 3, 3, 3, 1, 1, 3, 3, 3, 1, 3, 1, 3, 3, 3, 1, 1, 1, 3, 3, 1, 3, 3, 2, 6};
 	for (i = 0; i < Nr_vert; i++) {
 		coloreoValido[i] = lavados[i];
-		printf(" %i ", coloreoValido[i]);
+		printf(" %i", coloreoValido[i]);
 	}
+	
 
 	/*int primerLavado[] = {28, 5, 12, 16, 21, 17, 68, 64, 65, 53, 18, 6, 29, 59, 63, 57, 88, 87, 91, 76, 10, 44, 41, 40, 52, 86, 82, 80, 35, 39, 33, 75};
 	int segundoLavado[] = { 9, 50, 47, 8, 20, 56, 62, 55, 61, 3, 19, 4, 14, 51, 15, 67, 94, 66 };
