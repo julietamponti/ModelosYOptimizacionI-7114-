@@ -82,7 +82,7 @@ def crearLavados(prendas):
     return (lavados)            
 
 def escribirArchivo(lavados):
-    fichero = open('resultadoTP2-UltimaVersion.txt','w')
+    fichero = open('tercer_problema_resultado.txt','w')
     for lavado in lavados:
         for prenda in lavado.getPrendasEnLavado():
             fichero.write(str(prenda.get_nro()) + ' ' + str(lavado.getNumLavado()) +"\n")
@@ -90,7 +90,7 @@ def escribirArchivo(lavados):
     fichero.close()
 
 def main():
-    archivo = open('Enunciado2.txt',mode= 'r',encoding= 'utf-8')
+    archivo = open("Enunciado3.txt",mode= 'r',encoding= 'utf-8')
     listaPrendas = leerArc(archivo)
     #lista_orden_incomp = ordenCantidadIncompatibilidades(listaPrendas)
     lista_orden_tiempo = ordenTiempoDeLavado(listaPrendas)

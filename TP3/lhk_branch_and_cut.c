@@ -357,6 +357,9 @@ int procesar_Tp(char *path, char *pathOutput) {
 	printf("Cota: %f\n", bestobjval);
 	printf("Nodos: %d\n", nodecount);
 	printf("Tiempo: %f\n", fin - inicio);
+	for (i = 0; i < Nr_vert; i++) {
+		printf(" %i ", coloreoValido[i]);
+	}
 
 	/*=======================================================================*/
 

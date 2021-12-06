@@ -1,11 +1,1 @@
-﻿  graph.c
-  graphics.c
-  node.c
-  nodesList.c
-  pnode.c
-  pnodesList.c
-  leer_dimac.c
-  lhk_branch_and_cut.c
-  main.c
-  Generando código...
-  modelos_uno.vcxproj -> C:\Users\julip\OneDrive\Escritorio\ModelosUnoVS-se\modelos_uno.exe
+﻿  modelos_uno.vcxproj -> C:\Users\julip\OneDrive\Escritorio\ModelosYOptimizacionI-7114-\TP3\modelos_uno.exe
