@@ -1,15 +1,19 @@
 Procedi a trabajar con el codigo de la catedra en Visual Studio. Siguiendo con la seguidilla de pasos:
 
 Paso 1.
-Corri el codigo brindado de por la catedra sin realizarle ninguna modificacion. Este codigo al no tener un input de "buscarSolucionInicial", al ejecutar el codigo, no termina, se corta en los 1800 seg, que es el tiempo limite establecido. 
+Corri el codigo brindado de por la catedra sin realizarle ninguna modificacion. Este codigo al no tener un input de "buscarSolucionInicial", al ejecutar el codigo, 
+no termina, se corta en los 1800 seg, que es el tiempo limite establecido. 
 
 Paso 2.
 En primer lugar, cargue el txt del enunciado del tercer problema en la heuristica del TP2.
 Realizando este procedimiento, obtuve un primer resultado. De 7 lavados, los cuales demorarian 120 [unidad de tiempo] en el ranking de resultados de okapii.
-Hardecodee el resultado obtenido, en buscarSolucionInicial del codigo brindado por la catedra, nuevamente el codigo no finaliza. El problema esta vez, se debe a que esta tomando como maxColor 95(ya que toma cada prenda como un vertice).
+Hardecodee el resultado obtenido, en buscarSolucionInicial del codigo brindado por la catedra, nuevamente el codigo no finaliza. 
+El problema esta vez, se debe a que esta tomando como maxColor 95(ya que toma cada prenda como un vertice).
 
 Paso 3.
-Cambie entonces el valor del maxColor, por la cantidad de lavados obtenida con la heuristica del tp2, es decir, con 7. Al ejecutar el codigo con esta modificacion, descubrí otro inconveniente, y es que el modelo esta buscando todas las combinaciones posibles de lavados, con las 95 prendas, para intentar mejorar la solucion inicial.Pero, lo positivo es que llega a encontar el optimo, aunque un tiempo que excede el limite de 1800 seg.
+Cambie entonces el valor del maxColor, por la cantidad de lavados obtenida con la heuristica del tp2, es decir, con 7. Al ejecutar el codigo con esta modificacion,
+descubrí otro inconveniente, y es que el modelo esta buscando todas las combinaciones posibles de lavados, con las 95 prendas, para intentar mejorar la solucion
+inicial.Pero, lo positivo es que llega a encontar el optimo, aunque un tiempo que excede el limite de 1800 seg.
 
 Paso 4. 
 En este paso, se soluciona el inconveniente anterior, lo que genera que se reduzca el tiempo de ejecucion. Agregando las restricciones, (la Eliminacion de simetrias
