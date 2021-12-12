@@ -1,8 +1,11 @@
 Procedi a trabajar con el codigo de la catedra en Visual Studio. Siguiendo con la seguidilla de pasos:
 
 Paso 1.
-Corri el codigo brindado de por la catedra sin realizarle ninguna modificacion. Este codigo al no tener un input de "buscarSolucionInicial", al ejecutar el codigo, 
-no termina, se corta en los 1800 seg, que es el tiempo limite establecido. 
+Corrí el código brindado por la cátedra sin realizarle ninguna modificación. Este código
+utiliza como solución inicial por default(es decir como input)  95 lavados, por cada una de las 95 prendas asigna un lavado, 
+esto lo podemos ver en "buscarSolucionInicial". 
+Al ejecutar el código, vemos que no termina, se corta en los 1800 segundos, que es el tiempo limite establecido, esto se debe 
+a que la solución inicial del código, es muy poco eficiente y no logra optimizar dicha solucion en el limite de tiempo.
 
 Paso 2.
 En primer lugar, cargue el txt del enunciado del tercer problema en la heuristica del TP2.
